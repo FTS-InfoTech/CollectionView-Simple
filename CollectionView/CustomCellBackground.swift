@@ -1,5 +1,5 @@
 //
-//  DetailViewController.swift
+//  CustomCellBackground.swift
 //  CollectionView
 //
 //  Copyright © 2015 FTS InfoTech, LLC. All rights reserved.
@@ -24,38 +24,25 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class CustomCellBackground: UIView {
 
-    @IBOutlet weak var detailImageView: UIImageView!
-
-
-    var detailItem: AnyObject? {
-        didSet {
-            // Update the view.
-            self.configureView()
-        }
+    override func drawRect(rect: CGRect) {
+        
+        // draw a rounded rect bezier path filled with blue
+        let aRef = UIGraphicsGetCurrentContext();
+        CGContextSaveGState(aRef);
+        
+        let bezierPath = UIBezierPath.init(roundedRect: rect, cornerRadius: 5.0)
+        bezierPath.lineWidth = 5.0
+        UIColor.blackColor().setStroke()
+        
+        let fillColor = UIColor.init(colorLiteralRed: 0.529, green: 0.808, blue: 0.922, alpha: 1)   // color equivalent is #87ceeb
+        fillColor.setFill()
+        
+        bezierPath.stroke()
+        bezierPath.fill()
+        
+        CGContextRestoreGState(aRef)
     }
-
-    func configureView() {
-        // Update the user interface for the detail item.
-        if let detailImage = self.detailItem as? UIImage {
-            if let imageView = self.detailImageView {
-                imageView.image = detailImage
-            }
-        }
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        self.configureView()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 
 }
-

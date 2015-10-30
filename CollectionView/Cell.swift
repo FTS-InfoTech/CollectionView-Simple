@@ -1,5 +1,5 @@
 //
-//  DetailViewController.swift
+//  Cell.swift
 //  CollectionView
 //
 //  Copyright © 2015 FTS InfoTech, LLC. All rights reserved.
@@ -24,38 +24,16 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
-
-    @IBOutlet weak var detailImageView: UIImageView!
-
-
-    var detailItem: AnyObject? {
-        didSet {
-            // Update the view.
-            self.configureView()
-        }
+class Cell: UICollectionViewCell {
+    
+    @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var label: UILabel!
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        // change to our custom selected background view
+        let backgroundView = CustomCellBackground(frame: CGRectZero)
+        self.selectedBackgroundView = backgroundView
     }
-
-    func configureView() {
-        // Update the user interface for the detail item.
-        if let detailImage = self.detailItem as? UIImage {
-            if let imageView = self.detailImageView {
-                imageView.image = detailImage
-            }
-        }
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        self.configureView()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
 }
-
