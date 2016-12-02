@@ -33,7 +33,7 @@ class Cell: UICollectionViewCell {
         super.init(coder: aDecoder)
         
         // change to our custom selected background view
-        let backgroundView = CustomCellBackground(frame: CGRectZero)
+        let backgroundView = CustomCellBackground(frame: CGRect.zero)
         self.selectedBackgroundView = backgroundView
     }
 }

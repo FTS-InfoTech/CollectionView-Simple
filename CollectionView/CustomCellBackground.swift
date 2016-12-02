@@ -26,15 +26,15 @@ import UIKit
 
 class CustomCellBackground: UIView {
 
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         
         // draw a rounded rect bezier path filled with blue
         let aRef = UIGraphicsGetCurrentContext();
-        CGContextSaveGState(aRef);
+        aRef?.saveGState();
         
         let bezierPath = UIBezierPath.init(roundedRect: rect, cornerRadius: 5.0)
         bezierPath.lineWidth = 5.0
-        UIColor.blackColor().setStroke()
+        UIColor.black.setStroke()
         
         let fillColor = UIColor.init(colorLiteralRed: 0.529, green: 0.808, blue: 0.922, alpha: 1)   // color equivalent is #87ceeb
         fillColor.setFill()
@@ -42,7 +42,7 @@ class CustomCellBackground: UIView {
         bezierPath.stroke()
         bezierPath.fill()
         
-        CGContextRestoreGState(aRef)
+        aRef?.restoreGState()
     }
 
 }

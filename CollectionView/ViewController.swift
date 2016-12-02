@@ -33,15 +33,15 @@ class ViewController: UICollectionViewController {
     
     // the user tapped a collection item, load and set the image on the detail view controller
     //
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
-            let selectedIndexPath = self.collectionView?.indexPathsForSelectedItems()![0]
+            let selectedIndexPath = self.collectionView?.indexPathsForSelectedItems![0]
             
             // load the image
             let imageNameToLoad = "\(selectedIndexPath!.row)_full"
             let image = UIImage(named: imageNameToLoad)
             
-            if let detailViewController = segue.destinationViewController as? DetailViewController {
+            if let detailViewController = segue.destination as? DetailViewController {
                 detailViewController.detailItem = image
             }
         }
@@ -50,14 +50,14 @@ class ViewController: UICollectionViewController {
     
     // MARK: UICollectionViewDataSource
     
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 32
     }
     
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // we're going to use a custom UICollectionViewCell, which will hold an image and its label
         //
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! Cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! Cell
         
         // make the cell's title the actual NSIndexPath value
         cell.label.text = "{\(indexPath.row), \(indexPath.section)}"
